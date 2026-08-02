@@ -1,0 +1,15 @@
+workflows:
+  default:
+    name: Default
+    instance_type: mac_mini_m2
+    environment:
+      flutter: stable
+    scripts:
+      - name: Fix missing android folder
+        script: |
+          flutter create . --project-name factory_attendance --platforms android --org com.edita --no-overwrite || true
+      - name: Build APK
+        script: |
+          flutter build apk --release
+    artifacts:
+      - build/app/outputs/flutter-apk/*.apk
